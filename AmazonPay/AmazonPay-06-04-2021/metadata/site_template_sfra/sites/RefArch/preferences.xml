@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <custom-preferences>
+        <all-instances>
+            <preference preference-id="amzPayLocalesMap">{
+    "com": {
+        "en": "en_US"
+    },
+    "jp": {
+        "jp": "ja_JP"
+    },
+    "eu": {
+        "de": "de_DE",
+        "en": "en_GB",
+        "es": "es_ES",
+        "fr": "fr_FR",
+        "it": "it_IT"
+    }
+}</preference>
+        </all-instances>
+    </custom-preferences>
+</preferences>
+

@@ -1,0 +1,14 @@
+<div class="mb-sm-3">
+    <a href="${URLUtils.https('Checkout-Login')}" class="btn btn-primary btn-block checkout-btn ${pdict.valid.error ? 'disabled' : ''}"
+        role="button" aria-pressed="true">
+        ${Resource.msg('button.checkout','cart',null)}
+    </a>
+</div>
+
+<iscomment> Amazon Pay Button </iscomment>
+<isset name="sitePreferences" value="${require('dw/system/Site').getCurrent().getPreferences().getCustom()}" scope="page" />
+    <isif condition="${sitePreferences.amzPayEnabled}">
+        <div class="mb-sm-3">
+            <div id="AmazonPayButtonCart"></div>
+        </div>
+    </isif>

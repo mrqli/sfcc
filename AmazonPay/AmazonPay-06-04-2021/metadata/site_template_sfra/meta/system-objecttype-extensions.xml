@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="Basket">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="amzPayChargeId">
+                <display-name xml:lang="x-default">Charge - Identifier</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayChargePermissionId">
+                <display-name xml:lang="x-default">Charge Permission Identifier</display-name>
+                <description xml:lang="x-default">This value is returned at the end of a completed Checkout Session</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayChargeReasonCode">
+                <display-name xml:lang="x-default">Charge - Reason Code</display-name>
+                <description xml:lang="x-default">Reason code for current state</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Expired Unused</display>
+                        <value>ExpiredUnused</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Amazon Canceled</display>
+                        <value>AmazonCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Merchant Canceled</display>
+                        <value>MerchantCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Charge Permission Canceled</display>
+                        <value>ChargePermissionCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Buyer Canceled</display>
+                        <value>BuyerCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Soft Declined</display>
+                        <value>SoftDeclined</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Hard Declined</display>
+                        <value>HardDeclined</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Amazon Rejected</display>
+                        <value>AmazonRejected</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Processing Failure</display>
+                        <value>ProcessingFailure</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Transaction Timed Out</display>
+                        <value>TransactionTimedOut</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayChargeState">
+                <display-name xml:lang="x-default">Charge - State</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorization Initiated</display>
+                        <value>AuthorizationInitiated</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorized</display>
+                        <value>Authorized</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Capture Initiated</display>
+                        <value>CaptureInitiated</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Captured</display>
+                        <value>Captured</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Canceled</display>
+                        <value>Canceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Declined</display>
+                        <value>Declined</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayCheckoutSessionId">
+                <display-name xml:lang="x-default">Checkout Session - Identifier</display-name>
+                <description xml:lang="x-default">Checkout Session identifier</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayCheckoutSessionReasonCode">
+                <display-name xml:lang="x-default">Checkout Session - Reason Code</display-name>
+                <description xml:lang="x-default">Reason code for current state</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayCheckoutSessionState">
+                <display-name xml:lang="x-default">Checkout Session - State</display-name>
+                <description xml:lang="x-default">Current object state</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Open</display>
+                        <value>Open</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Completed</display>
+                        <value>Completed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Canceled</display>
+                        <value>Canceled</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayRedirectURL">
+                <display-name xml:lang="x-default">Amazon Pay Redirect URL</display-name>
+                <description xml:lang="x-default">URL provided by Amazon Pay. Merchant will redirect to this page after setting transaction details to complete checkout</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="sessionAddressBook">
+                <display-name xml:lang="x-default">Session Address Book</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Status">
+                <display-name xml:lang="x-default">Status</display-name>
+            </attribute-group>
+            <attribute-group group-id="Amazon Pay">
+                <display-name xml:lang="x-default">Amazon Pay</display-name>
+                <attribute attribute-id="amzPayChargePermissionId"/>
+                <attribute attribute-id="amzPayCheckoutSessionId"/>
+                <attribute attribute-id="amzPayCheckoutSessionState"/>
+                <attribute attribute-id="amzPayCheckoutSessionReasonCode"/>
+                <attribute attribute-id="amzPayChargeState"/>
+                <attribute attribute-id="amzPayChargeReasonCode"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="amzPayChargeId">
+                <display-name xml:lang="x-default">Charge ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayChargePermissionId">
+                <display-name xml:lang="x-default">Charge Permission ID</display-name>
+                <description xml:lang="x-default">This value is returned at the end of a completed Checkout Session</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayChargePermissionReasonCode">
+                <display-name xml:lang="x-default">Charge Permission - Reason Code</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <select-multiple-flag>true</select-multiple-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Amazon Canceled</display>
+                        <value>AmazonCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Amazon Closed</display>
+                        <value>AmazonClosed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Billing Address Deleted</display>
+                        <value>BillingAddressDeleted</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Buyer Canceled</display>
+                        <value>BuyerCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Charge In Progress</display>
+                        <value>ChargeInProgress</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Expired</display>
+                        <value>Expired</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Payment Method Deleted</display>
+                        <value>PaymentMethodDeleted</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Payment Method Expired</display>
+                        <value>PaymentMethodExpired</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Payment Method Invalid</display>
+                        <value>PaymentMethodInvalid</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Payment Method Not Allowed</display>
+                        <value>PaymentMethodNotAllowed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Payment Method Not Set</display>
+                        <value>PaymentMethodNotSet</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Merchant Canceled</display>
+                        <value>MerchantCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">MFA Failed</display>
+                        <value>MFAFailed</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayChargePermissionState">
+                <display-name xml:lang="x-default">Charge Permission State</display-name>
+                <description xml:lang="x-default">Current object state, can be either Chargeable, NonChargeable or Closed.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Chargeable</display>
+                        <value>Chargeable</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Non Chargeable</display>
+                        <value>NonChargeable</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Closed</display>
+                        <value>Closed</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayChargeReasonCode">
+                <display-name xml:lang="x-default">Charge Reason Code</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Expired Unused</display>
+                        <value>ExpiredUnused</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Amazon Canceled</display>
+                        <value>AmazonCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Merchant Canceled</display>
+                        <value>MerchantCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Charge Permission Canceled</display>
+                        <value>ChargePermissionCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Buyer Canceled</display>
+                        <value>BuyerCanceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Soft Declined</display>
+                        <value>SoftDeclined</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Hard Declined</display>
+                        <value>HardDeclined</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Amazon Rejected</display>
+                        <value>AmazonRejected</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Processing Failure</display>
+                        <value>ProcessingFailure</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Transaction Timed Out</display>
+                        <value>TransactionTimedOut</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayChargeState">
+                <display-name xml:lang="x-default">Charge State</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorized</display>
+                        <value>Authorized</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Captured</display>
+                        <value>Captured</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Canceled</display>
+                        <value>Canceled</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Declined</display>
+                        <value>Declined</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorization Initiated</display>
+                        <value>AuthorizationInitiated</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Capture Initiated</display>
+                        <value>CaptureInitiated</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayCheckoutSessionId">
+                <display-name xml:lang="x-default">Checkout Session ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayCheckoutSessionReasonCode">
+                <display-name xml:lang="x-default">Checkout Session Reason Code</display-name>
+                <description xml:lang="x-default">Reason code for current state</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayCheckoutSessionState">
+                <display-name xml:lang="x-default">Checkout Session State</display-name>
+                <description xml:lang="x-default">Current object state</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Open</display>
+                        <value>Open</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Completed</display>
+                        <value>Completed</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Canceled</display>
+                        <value>Canceled</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayNotificationsIds">
+                <display-name xml:lang="x-default">Notifications Ids</display-name>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayRefundId">
+                <display-name xml:lang="x-default">Refund Id</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayRefundReasonCode">
+                <display-name xml:lang="x-default">Refund Reason Code</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <select-multiple-flag>true</select-multiple-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Amazon Rejected</display>
+                        <value>AmazonRejected</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Processing Failure</display>
+                        <value>ProcessingFailure</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayRefundState">
+                <display-name xml:lang="x-default">Refund State</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Refund Initiated</display>
+                        <value>RefundInitiated</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Declined</display>
+                        <value>Declined</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Refunded</display>
+                        <value>Refunded</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Amazon Pay">
+                <display-name xml:lang="x-default">Amazon Pay</display-name>
+                <attribute attribute-id="amzPayChargePermissionId"/>
+                <attribute attribute-id="amzPayChargePermissionState"/>
+                <attribute attribute-id="amzPayChargePermissionReasonCode"/>
+                <attribute attribute-id="amzPayChargeId"/>
+                <attribute attribute-id="amzPayChargeState"/>
+                <attribute attribute-id="amzPayChargeReasonCode"/>
+                <attribute attribute-id="amzPayCheckoutSessionId"/>
+                <attribute attribute-id="amzPayCheckoutSessionState"/>
+                <attribute attribute-id="amzPayCheckoutSessionReasonCode"/>
+                <attribute attribute-id="amzPayNotificationsIds"/>
+                <attribute attribute-id="amzPayRefundId"/>
+                <attribute attribute-id="amzPayRefundReasonCode"/>
+                <attribute attribute-id="amzPayRefundState"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="OrderPaymentInstrument">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="amzPayPaymentDescriptor">
+                <display-name xml:lang="x-default">Amazon Pay Payment Descriptor</display-name>
+                <description xml:lang="x-default">Amazon Pay-provided description for buyer-selected payment instrument</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    </type-extension>
+
+    <type-extension type-id="Profile">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="amzPayBuyerId">
+                <display-name xml:lang="x-default">Buyer ID</display-name>
+                <description xml:lang="x-default">Unique Amazon Pay buyer identifier</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Amazon Pay">
+                <display-name xml:lang="x-default">Amazon Pay</display-name>
+                <attribute attribute-id="amzPayBuyerId"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="amzPayAPNMessageDigestAlgorithm">
+                <display-name xml:lang="x-default">Message Digest Algorithm</display-name>
+                <description xml:lang="x-default">The chosen algorithm in this preference is used to create a hash and the hex of the value in the APN Shared Token to ensure only request with the token can be made.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">MD2</display>
+                        <value>MD2</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">MD5</display>
+                        <value>MD5</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">SHA</display>
+                        <value>SHA</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">SHA-1</display>
+                        <value>SHA-1</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">SHA-256</display>
+                        <value>SHA-256</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">SHA-512</display>
+                        <value>SHA-512</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayAPNSharedToken">
+                <display-name xml:lang="x-default">APN Shared Token</display-name>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayCaptureDescriptor">
+                <display-name xml:lang="x-default">Capture Soft Descriptor</display-name>
+                <description xml:lang="x-default">Description shown on the buyer's payment instrument statement on capturing funds. Max length: 16 characters.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayCheckoutType">
+                <display-name xml:lang="x-default">Checkout Type</display-name>
+                <description xml:lang="x-default">Use a type of checkout with more or less steps.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">One Step Checkout</display>
+                        <value>OneStepCheckout</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">SFRA Checkout</display>
+                        <value>SFRACheckout</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayEnabled">
+                <display-name xml:lang="x-default">Enable Amazon Pay</display-name>
+                <description xml:lang="x-default">Allows enabling/disabling of the Amazon Pay cartridge.</description>
+                <type>boolean</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayEnvironment">
+                <display-name xml:lang="x-default">Environment</display-name>
+                <description xml:lang="x-default">Allows to set the storefront to work as sandbox or production environment.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Sandbox</display>
+                        <value>sandbox</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Live</display>
+                        <value>live</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayLocalesMap">
+                <display-name xml:lang="x-default">Locales Map</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-height>15</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayMerchantId">
+                <display-name xml:lang="x-default">Merchant ID</display-name>
+                <description xml:lang="x-default">The Amazon Pay Identifier for the Merchant</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayMerchantName">
+                <display-name xml:lang="x-default">Merchant Store Name</display-name>
+                <description xml:lang="x-default">The store name that will appear in emails sent by Amazon Pay to the buyers.</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayNoteToBuyer">
+                <display-name xml:lang="x-default">Note to Buyer</display-name>
+                <description xml:lang="x-default">Description of the order that will appear in emails sent by Amazon Pay to the buyers.</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-height>1</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayPaymentIntent">
+                <display-name xml:lang="x-default">Payment Intent</display-name>
+                <description xml:lang="x-default">Specifies the payment flow for charging the buyer - possible values are Confirm, Authorize or Authorized with Capture.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Confirm</display>
+                        <value>Confirm</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Authorize</display>
+                        <value>Authorize</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorize with Capture</display>
+                        <value>AuthorizeWithCapture</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayProductType">
+                <display-name xml:lang="x-default">Product Type</display-name>
+                <description xml:lang="x-default">Type of Amazon Pay integration.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">PayAndShip</display>
+                        <value>PayAndShip</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayPublicKeyId">
+                <display-name xml:lang="x-default">Public Key ID</display-name>
+                <description xml:lang="x-default">Provided by Amazon Pay Account Manager on receiving the Public Key ID.</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayRefundDescriptor">
+                <display-name xml:lang="x-default">Refund Soft Descriptor</display-name>
+                <description xml:lang="x-default">Description shown on the buyer's payment instrument statement on refunding funds. Max length: 16 characters.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayRegion">
+                <display-name xml:lang="x-default">Region</display-name>
+                <description xml:lang="x-default">Allows specifying - US, EU/UK or JP</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">US</display>
+                        <value>com</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">EU/UK</display>
+                        <value>eu</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">JP</display>
+                        <value>jp</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPaySecretKey">
+                <display-name xml:lang="x-default">Private Key</display-name>
+                <description xml:lang="x-default">Private key generated by the merchant</description>
+                <type>text</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPaySimulationCode">
+                <display-name xml:lang="x-default">Simulation Code</display-name>
+                <description xml:lang="x-default">Use this to simulate different behaviors. You should use like this: Action:Code. I.e.: Charge:HardDeclined. Use the values contained in the Amazon Pay documentation https://amazonpaycheckoutintegrationguide.s3.amazonaws.com/amazon-pay-checkout/sandbox-simulations.html.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <regex>\w+:\w+</regex>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzPayStoreId">
+                <display-name xml:lang="x-default">Store ID</display-name>
+                <description xml:lang="x-default">This is the Login with Amazon Client ID, which can be retrieved from "Login with Amazon" in Seller Central. It allows the configuration of name, privacy policy and logo during checkout.</description>
+                <type>string</type>
+                <mandatory-flag>true</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="amzCaptureNow">
+                <display-name xml:lang="x-default">Capture Now</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="AmazonPay_v2">
+                <display-name xml:lang="x-default">Amazon Pay Configurations</display-name>
+                <attribute attribute-id="amzPayEnabled"/>
+                <attribute attribute-id="amzPayEnvironment"/>
+                <attribute attribute-id="amzPayRegion"/>
+                <attribute attribute-id="amzPayCheckoutType"/>
+                <attribute attribute-id="amzPayMerchantId"/>
+                <attribute attribute-id="amzPayMerchantName"/>
+                <attribute attribute-id="amzPayStoreId"/>
+                <attribute attribute-id="amzPayNoteToBuyer"/>
+                <attribute attribute-id="amzPayCaptureDescriptor"/>
+                <attribute attribute-id="amzPayRefundDescriptor"/>
+                <attribute attribute-id="amzPayProductType"/>
+                <attribute attribute-id="amzPayPaymentIntent"/>
+                <attribute attribute-id="amzPayPublicKeyId"/>
+                <attribute attribute-id="amzPaySecretKey"/>
+                <attribute attribute-id="amzPayAPNSharedToken"/>
+                <attribute attribute-id="amzPayAPNMessageDigestAlgorithm"/>
+                <attribute attribute-id="amzPaySimulationCode"/>
+                <attribute attribute-id="amzPayLocalesMap"/>
+                <attribute attribute-id="amzCaptureNow"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+</metadata>
