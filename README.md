@@ -1,5 +1,5 @@
 # Personal SFCC Notes
-My SFCC notes and things worth noting
+My SFCC notes and things worth noting<br>
 Third party cartridge codes will not be uploaded here, as the cartridges are very possibly to be updated in the future and they should be easily accessed.
 
 ### Coding
