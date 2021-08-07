@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<payment-settings xmlns="http://www.demandware.com/xml/impex/paymentsettings/2009-09-15">
-    <payment-method method-id="AMAZON_PAY">
-        <name xml:lang="x-default">Amazon Pay</name>
-        <enabled-flag>true</enabled-flag>
-        <processor-id>AMAZON_PAY</processor-id>
-    </payment-method>
-</payment-settings>
