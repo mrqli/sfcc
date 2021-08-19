@@ -5,6 +5,6 @@ Third party cartridge codes will not be uploaded here, as the cartridges are ver
 ### Coding
 [Coding](coding)
 ### Integrations
-- [Amazon Pay](integrations/AmazonPay/README.md)
-- [PayPal](integrations/PayPal/README.md)
-- [Salesforce Marketing Cloud Connector](integrations/Marketing%20CLoud%20Connector/README.md)
+- [Amazon Pay](integrations/AmazonPay)
+- [PayPal](integrations/PayPal)
+- [Salesforce Marketing Cloud Connector](integrations/Marketing%20CLoud%20Connector)
