@@ -4,7 +4,7 @@ To get Amazon Pay cartridge, go to [Amazon seller central](https://sellercentral
 Follow the [documentation](documentation/Amazon%20Payments%20SFRA%20LINK%20Cartridge%20Documentation.docx) to install the cartridges. However, there are some issues during the implementation.
 
 ### Setup
-- Put *`int_amazonpay_sfra`* between *`app_accelerator_core`* and *`app_project_core`* in cartridge paths for AFX version of Born
+- Put *`int_amazonpay_sfra`* between *`app_project_core`* and *`app_accelerator_core`* in cartridge paths for AFX version of Born
 
 - APN Shared Token. How/Where to obtain the token is not addressed in the documentation or on the website.
 
@@ -12,10 +12,44 @@ Follow the [documentation](documentation/Amazon%20Payments%20SFRA%20LINK%20Cartr
 
 ### Custom Code
 - ~~Probably because the code change is for SFRA only, not for Born's AFX. When the frontend JS is added to the build, there will be webpack issues. JS scripts on buttons won't work.~~
-In package.json, add *`int_amazonpay_sfra`* between *`app_accelerator_core::core`* and *`app_storefront_base::base`* for AFX to avoid frontend JS overwrite.In general, add cartridge path right before *`app_storefront_base::base`*
+In package.json, add *`int_amazonpay_sfra`* between *`app_accelerator_core::core`* and *`app_storefront_base::base`* for AFX to avoid frontend JS overwrite. In general, add cartridge path right before *`app_storefront_base::base`*
+
+- `cartridges/int_amazonpay_sfra/cartridge/controllers/Cart.js`
+Clear `amzPayCheckoutSessionId` and `amzPayRedirectURL` in basket to ensure when customers change their mind to use normal checkout instead of AmazonPay, they are able to check out.
+```js
+server.append('Show', function (req, res, next) {
+    var Resource = require('dw/web/Resource');
+    //Custom change to avoid impacting normal checkout
+    var Transaction = require('dw/system/Transaction');
+    var BasketMgr = require('dw/order/BasketMgr');
+    var currentBasket = BasketMgr.getCurrentBasket();
+    Transaction.wrap(function () {
+        currentBasket.custom.amzPayCheckoutSessionId = null;
+        currentBasket.custom.amzPayRedirectURL = null;
+    });
+    //Custom change end
+
+    var viewData = res.getViewData();
+    var query = req.querystring;
+    if (query.amzError) {
+        viewData.amzError = true;
+        viewData.errorMessage = Resource.msg('error.message.' + query.errorMessage, 'amazon', null);
+    }
+
+    res.setViewData(viewData);
+    return next();
+});
+```
+- `cartridges/int_amazonpay_sfra/cartridge/controllers/Checkout.js`
+Add a condition to avoid impacting normal checkout
+![Checkout.js change](screenshots/checkout.png)
+
+- `cartridges/int_amazonpay_sfra/cartridge/controllers/Order.js`
+Add a condition to avoid impacting normal checkout
+![Order.js change](screenshots/order.png)
 
 - For tax calculation, AmazonPay saves the shipping address to shipment in cart. If the project is integrated with Vertex, Vertex uses the address from forms to calculate tax. In order to work with AmazonPay, custom change is as below in `cartridges/int_vertex/cartridge/scripts/init/initVertexApi.js`
-```javascript
+```js
   var forms = session.forms;
     if (!empty(forms)) {
         if (forms.singleshipping) {
