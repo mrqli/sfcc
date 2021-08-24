@@ -23,10 +23,12 @@ server.append('Show', function (req, res, next) {
     var Transaction = require('dw/system/Transaction');
     var BasketMgr = require('dw/order/BasketMgr');
     var currentBasket = BasketMgr.getCurrentBasket();
-    Transaction.wrap(function () {
-        currentBasket.custom.amzPayCheckoutSessionId = null;
-        currentBasket.custom.amzPayRedirectURL = null;
-    });
+    if (currentBasket) {
+        Transaction.wrap(function () {
+            currentBasket.custom.amzPayCheckoutSessionId = null;
+            currentBasket.custom.amzPayRedirectURL = null;
+        });
+    }
     //Custom change end
 
     var viewData = res.getViewData();
@@ -41,7 +43,7 @@ server.append('Show', function (req, res, next) {
 });
 ```
 - `cartridges/int_amazonpay_sfra/cartridge/controllers/Checkout.js`
-Add a condition to avoid impacting normal checkout
+Add a condition to avoid impacting normal checkout(also remember to add `currentBasket` null check)
 ![Checkout.js change](screenshots/checkout.png)
 
 - `cartridges/int_amazonpay_sfra/cartridge/controllers/Order.js`
