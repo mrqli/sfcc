@@ -147,3 +147,5 @@ Add a condition to avoid impacting normal checkout
 - Shipping to multiple addresses and BOPIS are out of scope for this implementation of the cartridge.
 
 - This implementation assumes no integration with a third-party order management system.
+
+- Amazon Checkout seems not to support checkout from minicart page, and only entry is from cart page.
