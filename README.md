@@ -6,5 +6,7 @@ Third party cartridge codes will not be uploaded here, as the cartridges are ver
 [Coding](coding)
 ### Integrations
 - [Amazon Pay](integrations/AmazonPay)
+- [OCAPI](integrations/OCAPI)
+  - [Apple Pay](integrations/OCAPI/ApplePay)
 - [PayPal](integrations/PayPal)
 - [Salesforce Marketing Cloud Connector](integrations/Marketing%20CLoud%20Connector)
