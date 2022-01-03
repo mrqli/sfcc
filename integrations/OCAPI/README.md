@@ -13,3 +13,9 @@ What is the `dw.order.OrderPaymentInstrument` input argument passed to the hook?
 Note: the amount and the `security_code` (cvn) contained in the `payment_card` data will be propagated if available to `dw.order.payment.authorizeCreditCard` even if the `dw.order.OrderPaymentInstrument` is resolved from a customer payment instrument.
 
 In [ApplePay](integrations/OCAPI/ApplePay) case, the authorization will call hook `dw.order.payment.authorize`.
+
+## No Transaction set in OCAPI
+Transaction is not allowed in modifyXXXResponse
+
+## `CustomerMgr.removeCustomer()` cannot be used in OCAPI
+When CustomerMgr removes a customer, it creates a new storefront session. This will cause `java.lang.ClassCastException`. The OCAPI session is `.com.salesforce.cc.digital.rest.ecom.RESTSession` while the storefront session is `com.demandware.beehive.core.internal.request.SforefrontSession`
