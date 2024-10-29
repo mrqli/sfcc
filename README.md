@@ -8,6 +8,7 @@ Third party cartridge codes will not be uploaded here, as the cartridges are ver
 - [Website Optimization](concepts/Website%20Optimization.md)
 - [Job Framework](concepts/Job%20Framework.md)
 - [Content Assets, Content Slots and Campaigns](concepts/Content%20Assets,%20Content%20Slots%20and%20Campaigns.md)
+- [SCAPI](concepts/SCAPI.md)
 ### Coding
 - [Caching](coding/Caching.md)
 - [Calendar-Date Conversion](coding/Calendar-Date%20Conversion.md)

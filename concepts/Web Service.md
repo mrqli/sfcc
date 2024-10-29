@@ -23,7 +23,7 @@ SFCC Service Framework simplifies and enchances the management of web service ca
       - It includes properties like ```configuration```, ```credentialID```, ```mock``` status, ```requestData```, ```response```, ```throwOnError```, and ```URL```, along with methods for service invocation and configuration.
  
 ## Rate Limiter
-The rate limiter allows a maximum number of calls to a web service in a specified time interval. If the rate limit is reached, a ``ServiceUnavailableException`` is thrown.
+The rate limiter allows a maximum number of calls to a web service in a specified time interval. The rate limit is checked prior to every invocation of the web service. If the rate limit is reached, a ``ServiceUnavailableException`` is thrown.
 
 ## Circuit Breaker
-The circuit breaker suspends calls to a web service if a certain number of calls fail within a specified time interval. If the rate limit is reached, a ``ServiceUnavailableException`` is thrown.
+The circuit breaker suspends calls to a web service if a certain number of calls fail within a specified time interval. If the limit is reached, a ``ServiceUnavailableException`` is thrown.
