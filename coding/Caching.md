@@ -6,17 +6,6 @@ For OCAPI, only GET calls can be cached. The Data API does not support caching a
 
 Currently, you can’t control the server-side cache times of SCAPI. 
 
-~~## Page Caching~~
-~~If different pagecache settings are supplied for different components of the page, the response takes on the shortest of the pagecache settings. For example, if you have a page where:~~
-
-~~Component A has a 1-minute relative pagecaching.~~
-~~Component B has a 1-hour relative pagecaching.~~
-~~Component C has a 1-day relative pagecaching.~~
-~~The final calculated relative pagecaching is the minimum of these three values (1 minute).~~
-
-~~## <iscache> Element~~
-~~If you add multiple <iscache> elements in your template (or in locally included templates), one element takes precedence over the others. If an element turns caching off, it’s given precedence over the other elements. Otherwise, the element with the shortest cache time is given precedence. In general, when there are multiple <iscache> elements, the most restrictive one wins.~~
-
 ## Page Caching
 In essence, the page cache is a key value store. The key is the full URL including query string and the value is the cached page. The page can contain markers for remote includes that are resolved the same way. The high-level processing logic is as follows.
 
@@ -27,7 +16,18 @@ In essence, the page cache is a key value store. The key is the full URL includi
       1. Call the application layer to obtain a response.
       2. Check if the response is marked for caching. If yes, save in the page cache.
       3. Return the response.
-   
+
+If different pagecache settings are supplied for different components of the page, the response takes on the shortest of the pagecache settings. For example, if you have a page where:
+
+Component A has a 1-minute relative pagecaching.
+Component B has a 1-hour relative pagecaching.
+Component C has a 1-day relative pagecaching.
+The final calculated relative pagecaching is the minimum of these three values (1 minute).
+
+### \<iscache> Element
+If you add multiple <iscache> elements in your template (or in locally included templates), one element takes precedence over the others. If an element turns caching off, it’s given precedence over the other elements. Otherwise, the element with the shortest cache time is given precedence. In general, when there are multiple <iscache> elements, the most restrictive one wins.
+
+
 Two APIs can control the caching behavior of the response.
 - the `dw.system.Response#setExpires(milliseconds)` script API
 - the `<iscache>` tag
@@ -63,6 +63,30 @@ if (availabilityModel.isOrderable(50)) {
   response.setExpires(new Date().getTime() + 30 * 60 * 1000);
 }
 ```
+
+## Page Caching Best Practices 
+
+1.  Caching is controlled on a per page basis, via the ISML template for the page.
+2.  Caching duration is specified in the page, typically 24 hours.
+3.  Frequently changing pages benefit from a shorter caching period.
+4.  Stored pages are only invalidated and a new one pulled from the Application Server if any of the following happen:
+    1. the defined caching time is exceeded
+    2. a replication is performed
+    3. the merchant triggers an explicit page cache invalidation in Business Manager
+5. To see changes immediately, disable page caching on Sandboxes and Staging instances.
+6. Portions of pages can be cached separately. Assemble a page from snippets with different caching attributes using remote includes. Each part:
+    1. has to be a result of a pipeline request to the application server
+    2. is included using the `<isinclude url="">` syntax
+    3. can have different or no caching tags
+    4. all sections are assembled by Web Adapter and responded to client
+7. In general, don't cache pages that show buyer or session information.
+8. If you see certain trends in analytic data, you might decide to alter the time length for caching of static content.
+9. If you have a specific type of error in production, you might need to invalidate caching briefly to do a hot fix.
+
+
+## Pache Cache Partition
+The page cache for remote includes and iscomponent elements aren’t automatically invalidated when the page cache for the pipeline that contains the rendering template is invalidated. Therefore, if you want to refresh the content on the Home page by invalidating the Home-Show pipeline, and you have remote includes to Content-Show, then you must also explicitly invalidate the Content-Show pipeline.
+
 
 ## Application Level Caching
 
